@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import {GifGriditem} from './GifGriditem';
 
 export const GifGrid = ({ category }) => {
-  const [count, setcount] = useState(0);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     getGif();
@@ -9,7 +10,7 @@ export const GifGrid = ({ category }) => {
 
   const getGif = async () => {
     const url =
-      "https://api.giphy.com/v1/gifs/search?api_key=hFwW2HfDVVe5nSppQiVNxTYNRHZ3262h&q=Goku&limit=10";
+      "https://api.giphy.com/v1/gifs/search?api_key=hFwW2HfDVVe5nSppQiVNxTYNRHZ3262h&q=rickandmorty&limit=10";
 
     const resp = await fetch(url);
 
@@ -23,14 +24,17 @@ export const GifGrid = ({ category }) => {
       };
     });
 
-    console.log(gifs);
+    setImages(gifs);
   };
 
   return (
     <div>
       <p>{category}</p>
-      <h3>{count}</h3>
-      <button onClick={() => setcount(count + 1)}></button>
+      <ol>
+        {images.map((img) => {
+          return <GifGriditem key={img.id} {...img} />;
+        })}
+      </ol>
     </div>
   );
 };
