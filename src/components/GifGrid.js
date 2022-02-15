@@ -10,7 +10,7 @@ export const GifGrid = ({ category }) => {
 
   const getGif = async () => {
     const url =
-      "https://api.giphy.com/v1/gifs/search?api_key=hFwW2HfDVVe5nSppQiVNxTYNRHZ3262h&q=rickandmorty&limit=10";
+      "https://api.giphy.com/v1/gifs/search?api_key=hFwW2HfDVVe5nSppQiVNxTYNRHZ3262h&q=anime&limit=20";
 
     const resp = await fetch(url);
 
@@ -30,7 +30,7 @@ export const GifGrid = ({ category }) => {
   return (
     <div>
       <p>{category}</p>
-      <ol>
+      <ol className="card-grid">
         {images.map((img) => {
           return <GifGriditem key={img.id} {...img} />;
         })}
